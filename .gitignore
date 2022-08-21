@@ -1,0 +1,6 @@
+# reporting 
+.DS_Store
+*.html
+*.xml
+*.png
+.env
