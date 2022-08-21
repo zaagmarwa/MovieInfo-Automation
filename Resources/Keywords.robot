@@ -16,12 +16,18 @@ Switch to Top Rated tab
     Click Element   ${topRated_path}
 
 Check tab content
-    ${elements}=    GetWebElements    xpath=//XCUIElementTypeCell
+    ${elements}=    GetWebElements    ${cell_path} 
     FOR    ${element}    IN    @{elements}
         ${index}=     Get Element Attribute    ${element}  index
         # index 0 and index 1 interpreted index=false , index=true so we need to replace them 
         ${formatted_index}=    set variable    ${index.replace('false', '0').replace('true', '1')}  
-            ${fields}=  GetWebElements     xpath=//XCUIElementTypeCell[@index=${formatted_index}]/XCUIElementTypeStaticText
+            ${fields}=  GetWebElements     ${cell_path}[@index=${formatted_index}]/XCUIElementTypeStaticText
             ${count}=    Get length    ${fields}
             Should Be True	${count} >= 3  # Expect minimum 3 fields to exist (Date, Rating, Title)
     END
+
+Click on Search
+    Click Element   ${search_btn_path}
+
+Reset Search field
+    Click Element   ${clear_text_path} 
